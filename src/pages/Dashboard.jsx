@@ -20,7 +20,7 @@ const { blogs } = useSelector(state => state.blog);
   console.log(blogs);
   return (
     <>
-      <Grid container>
+      <Grid container sx={{display:"flex",justifyContent:"center",alignItems:"center", gap:4}}>
         {blogs?.map((blog) => (
           <Grid item key={blog.id}>
          <BlogCard blog={blog}/>

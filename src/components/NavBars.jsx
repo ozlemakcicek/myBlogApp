@@ -20,6 +20,7 @@ import { useSelector } from 'react-redux';
 import { toastWarnNotify } from '../helper/ToastNotify';
 import MyFoto from "../assets/OIF.jpg"
 import AdbIcon from "@mui/icons-material/Adb";
+import logo2 from "../assets/1.png"
 
 
 
@@ -114,14 +115,13 @@ const handleClickPages=(pages)=>{
             <Box
               // component="a"
               href="/"
-              sx={{ display: { xs: "flex" }, mr: 1 }}
+              sx={{ display: { xs: "none",lg:"flex" }, mr: 1 }}
             >
               <img
                 src={MyLogo}
-                alt='myLogo'
+                alt="myLogo"
                 style={{
                   width: "120px",
-                
 
                   // borderRadius:"50%",
                   paddingRight: "20px",
@@ -195,15 +195,8 @@ const handleClickPages=(pages)=>{
               </Menu>
             </Box>
 
-            {/* <img
-              src={MyFoto}
-              alt=""
             
-              style={{
-                width:"130px",
-                height:"12vh",}}
-            />  */}
-            <Typography
+            {/* <Typography
               variant="h5"
               noWrap
               component="a"
@@ -219,17 +212,39 @@ const handleClickPages=(pages)=>{
                 textDecoration: "none",
               }}
             >
-            {/* kucuk ekranlarda */}
+              
               BLOG APP
-            </Typography>
+            </Typography> */}
+            {/* kucuk ekranlarda */}
+            <Box
+              // component="a"
+              href="/"
+              sx={{ display: { xs: "flex",lg:"none" }, mr: 1 }}
+            >
+              <img
+                src={logo2}
+                alt="myLogo"
+                style={{
+                  width: "120px",
+               
+                  // borderRadius:"50%",
+                  paddingRight: "90px",
+                }}
+                onClick={() => navigate("/")}
+              />
+            </Box>
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
               {pages.map((page) => (
                 <Button
                   key={page.title}
                   // onClick={handleCloseNavMenu}
                   onClick={() => handleClickPages(page)}
-                  sx={{ my: 2, color: "black", display: "block",fontWeight:"600" }}
-                  
+                  sx={{
+                    my: 2,
+                    color: "black",
+                    display: "block",
+                    fontWeight: "600",
+                  }}
                 >
                   {page.title}
                 </Button>
@@ -288,7 +303,6 @@ const handleClickPages=(pages)=>{
               </Menu>
             </Box>
           </Toolbar>
-        
         </Container>
       </AppBar>
     </Box>
