@@ -49,7 +49,8 @@ const LoginForm = ({values,handleBlur,handleChange,touched,errors}) => {
           required
         />
 
-        <Button type="submit" variant="contained" size="large">
+        <Button type="submit" variant="contained" size="large"
+        >
          Anmeldung
         </Button>
       </Box>

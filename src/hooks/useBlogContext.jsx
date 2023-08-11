@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchFail, fetchStart, getSuccess} from '../features/blogSlice'
+import { fetchFail, fetchStart, getNewBlogSuccess, getSuccess} from '../features/blogSlice'
 import axios from "axios"
 import { toastErrorNotify, toastSuccessNotify } from '../helper/ToastNotify';
 import useAxios from './useAxios';
@@ -40,7 +40,8 @@ const  getBlogData=async(url)=>{
     dispatch(fetchStart())
 
     try {
-      const {data}= await axios.get(`${BASE_URL}api/${url}/`)
+       const {data}= await axios.get(`${BASE_URL}api/${url}/`)
+     
        
         console.log(data);
    
@@ -78,13 +79,29 @@ const deleteBlogData = async (url,id) => {
 
 
 
+const postNewBlog=async(values)=>{
+  dispatch(fetchStart())
+  console.log(values);
+  try {
+   const {data}= await axiosWithToken.post(`api/blogs`, values )
+   dispatch(getNewBlogSuccess(data))
+  
+
+  } catch (error) {
+    dispatch(fetchFail())
+    
+  }
+}
 
 
 
 
 
 
-return{getBlogData,deleteBlogData}
+
+
+
+return{getBlogData,deleteBlogData,postNewBlog}
 }
 
 export default useBlogContext

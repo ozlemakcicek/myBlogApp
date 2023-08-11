@@ -33,15 +33,15 @@ const pages = [
   { title: "About", 
     path: "/about" },
 
-  { title: "New Blog", 
-    path: "/blog/new blog" },
+  { title: "NewBlog", 
+    path: "/blog/newblog" },
 ];
 const settings = [
   {title:"Profile",
    path:"/profile"},
 
-  { title:"My Blog",
-    path:"/my blog"},
+  { title:"MyBlog",
+    path:"/myblog"},
 
     {title:"Logout",
      path:"/"}

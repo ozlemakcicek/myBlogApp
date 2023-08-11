@@ -10,27 +10,30 @@ const blogSlice = createSlice({
   initialState: {
     loading: false,
     error: false,
-    comments:[],
-    likes:[],
-    categories:[],
-    blogs:[]
-    
+    comments: [],
+    likes: [],
+    categories: [],
+    blogs: [],
   },
   reducers: {
     fetchStart: (state) => {
       state.loading = true;
       state.error = false;
     },
-   //  her bir api yapisi icin tek tek reducer yazmak yerine tek bir reducer ile isi halledeblrz.veri getirmek icin getSuccess reduceri yaziyoruz.initialState ler bir obje o.i. objelerde key ler 2 yolla cagrilir.1- . notation 2- [] notation. FAKAT burda string olarak gelecek veriler ve . notation olmaz(state."likes" diye bir yazim yok cunku) .o nedenle [ ]icinde yazacagiz.su url den gelen veriyi data ya esitle diyoruz.ve bunu store a bildirelim
-  getSuccess:(state,{payload})=>{
-    state.loading=false;
-    state[payload.url]=payload.data;
-   },
-
+    //  her bir api yapisi icin tek tek reducer yazmak yerine tek bir reducer ile isi halledeblrz.veri getirmek icin getSuccess reduceri yaziyoruz.initialState ler bir obje o.i. objelerde key ler 2 yolla cagrilir.1- . notation 2- [] notation. FAKAT burda string olarak gelecek veriler ve . notation olmaz(state."likes" diye bir yazim yok cunku) .o nedenle [ ]icinde yazacagiz.su url den gelen veriyi data ya esitle diyoruz.ve bunu store a bildirelim
+    getSuccess: (state, { payload }) => {
+      state.loading = false;
+      state[payload.url] = payload.data;
+    },
 
     fetchFail: (state) => {
       state.loading = false;
       state.error = true;
+    },
+
+    getNewBlogSuccess: (state, { payload }) => {
+      state.loading = false;
+      state.blogs = [...state.blogs, { ...payload }];
     },
   },
 });
@@ -39,5 +42,6 @@ export const {
   fetchStart,
   getSuccess,
   fetchFail,
+  getNewBlogSuccess,
 } = blogSlice.actions;
 export default blogSlice.reducer; // burasi karsilarken blogReducer oluyor

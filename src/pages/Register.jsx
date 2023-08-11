@@ -44,7 +44,7 @@ const Register = () => {
           rowSpacing={{ sm: 3 }}
           sx={{ height: "85vh", paddingTop: "1rem" }}
         >
-          <Grid item xs={12} sm={8} md={10}>
+          <Grid item xs={12} sm={12} md={12}>
             <Avatar
               sx={{
                 backgroundColor: "primary.dark",
@@ -91,16 +91,16 @@ const Register = () => {
               <Link to="/login">Haben Sie einen Account?</Link>
             </Box>
           </Grid>
-          <Grid item xs={2} sm={4} md={6}>
+          <Grid item xs={12} sm={10} md={8} lg={6}>
             <Container>
-              {" "}
+            
               <img
                 src={myImage}
                 alt="" // eslint-disable-next-line
                 style={{
                   width: "600px",
                 }}
-                xs={2}
+                
               />
             </Container>
           </Grid>

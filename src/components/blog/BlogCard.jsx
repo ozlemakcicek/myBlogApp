@@ -40,23 +40,29 @@ const BlogCard=({blog})=> {
         height="130"
         image={blog.image}
         alt="image"
-        sx={{objectFit:"content"}}
+        sx={{ objectFit: "content" }}
       />
       <CardHeader title={blog.title} align="center" />
 
-      <CardContent >
-        <Typography variant="body2" color="text.secondary" sx={{overflow:"hidden",
-        textOverflow:"ellipsis",
-        display:"-webkit-box",WebkitLineClamp:2,WebkitBoxOrient:"vertical"}}>
+      <CardContent>
+        <Typography
+          variant="body2"
+          color="text.secondary"
+          sx={{
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            display: "-webkit-box",
+            WebkitLineClamp: 2,
+            WebkitBoxOrient: "vertical",
+          }}
+        >
           {blog.content}
         </Typography>
-        <Typography sx={{paddingTop:2}}>{currentDate}</Typography>
-<Grid sx={{display:"flex",gap:2,marginTop:"2rem"}}>
-<AccountCircleIcon sx={{color:"grey"}}/>
-<span>admin</span>
-</Grid>
-        
-      
+        <Typography sx={{ paddingTop: 2 }}>{currentDate}</Typography>
+        <Grid sx={{ display: "flex", gap: 2, marginTop: "2rem" }}>
+          <AccountCircleIcon sx={{ color: "grey" }} />
+          {currentUser ? <span>{currentUser}</span> : <span>admin</span>}
+        </Grid>
       </CardContent>
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
@@ -72,13 +78,13 @@ const BlogCard=({blog})=> {
           sx={{
             width: "7rem",
             height: "4vh",
-            color:"white",
+            color: "white",
             bgcolor: "grey",
             "&:hover": {
               bgcolor: "lightgrey",
-              color:"grey"
+              color: "grey",
             },
-            marginLeft:"5rem"
+            marginLeft: "5rem",
           }}
         >
           READ MORE

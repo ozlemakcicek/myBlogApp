@@ -9,6 +9,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toastErrorNotify, toastSuccessNotify } from "../helper/ToastNotify";
+import useAxios from "./useAxios";
 
 
 const useAuthContext = () => {
@@ -17,6 +18,8 @@ const useAuthContext = () => {
   // .env dosyasinda url i sifreledik.ve URL i kullandigimiz alan olan bu custom hook da asagidaki sekilde cagirdik.token bilgisini de authSlice dan getiriyoruz.sonra burdan da axios instance kullanarak tasiyacagiz.
   const {token} = useSelector(state=>state.auth)
   const BASE_URL = process.env.REACT_APP_BASE_URL;
+
+  const {axiosWithToken}=useAxios()
 
 
 
@@ -69,6 +72,7 @@ const useAuthContext = () => {
           Authorization:`Token ${token}`
         }
       });
+      
       dispatch(logoutSuccess())
       toastSuccessNotify("Abmeldung durchgeführt");
       navigate("/")

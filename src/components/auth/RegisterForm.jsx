@@ -47,7 +47,7 @@ const RegisterForm = ({
   return (
     <>
       <Form>
-        <Box sx={{ display: "flex", flexDirection: "column", gap: 2,marginLeft:"3rem" }}>
+        <Box sx={{ display: "flex", flexDirection: "column", gap: 2,marginLeft:"3rem" }} >
           <TextField
             id="username"
             name="username"
