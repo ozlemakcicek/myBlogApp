@@ -1,9 +1,16 @@
-import React from 'react'
-import {  Form } from "formik";
+import React from "react";
+import { Form } from "formik";
+import { object, string,ref } from "yup";
+import TextField from "@mui/material/TextField";
+import Box from "@mui/material/Box";
 import * as Yup from "yup";
-import { Box, Button, TextField} from "@mui/material";
 
-//RegisterShema yi getirdik aynisi ile ama basina export demeliyiz ve Register sayfasinda da importunu yaüpmaliyiz
+// import { useNavigate } from "react-router-dom";
+import { Button } from "@mui/material";
+
+
+
+
 
 export const RegisterSchema = Yup.object().shape({
   username: Yup.string()
@@ -32,22 +39,28 @@ export const RegisterSchema = Yup.object().shape({
     )
     .required("erforderlich"),
   password2: Yup.string() //! password ile uyusmasi lazim o nedenle asagidaki cod yaziliyor
-    .oneOf([Yup.ref("password"),null], "Das Passwort muss identisch sein!")
+    .oneOf([Yup.ref("password"), null], "Das Passwort muss identisch sein!")
     .required("erforderlich"),
 });
 
 
+
+  
+ 
 const RegisterForm = ({
   values,
   errors,
   touched,
   handleChange,
   handleBlur,
+ 
+
 }) => {
+
   return (
-    <>
+    <div>
       <Form>
-        <Box sx={{ display: "flex", flexDirection: "column", gap: 2,marginLeft:"3rem" }} >
+        <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
           <TextField
             id="username"
             name="username"
@@ -61,7 +74,7 @@ const RegisterForm = ({
             helperText={touched.last_name && errors.username}
             error={touched.last_name && Boolean(errors.username)}
             required
-            //error=True ya da False olsun diye Boolean  ile sarmalaldik 
+            //error=True ya da False olsun diye Boolean  ile sarmalaldik
           />
           <TextField
             id="first_name"
@@ -157,9 +170,8 @@ const RegisterForm = ({
           </Button>
         </Box>
       </Form>
-    </>
+    </div>
   );
 };
 
-
-export default RegisterForm
+export default RegisterForm;

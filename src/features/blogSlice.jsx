@@ -1,8 +1,8 @@
-//!authSlice dan kopyaladik ve auth isimlerini blog yapip, initialState leri api deki endpointlere gore ayni isimle yazdik.Authentication reducerlarini silip burda lazim olanlari yaziyoruz.ve sonra store a bildiriyoruz.en altta reducer ini export yapmis zaten store da da blogReduceri import ediyoruz
+import { createSlice } from '@reduxjs/toolkit'
+import axios from 'axios'
+import React from 'react'
 
-import { createSlice } from "@reduxjs/toolkit";
 
-// initialState leri Api deki endpoint isimleri ile ayni verdik ve bos array yaptik baslangic degerlerini
 
 const blogSlice = createSlice({
   name: "blog",
@@ -10,38 +10,78 @@ const blogSlice = createSlice({
   initialState: {
     loading: false,
     error: false,
-    comments: [],
-    likes: [],
-    categories: [],
     blogs: [],
+    categories: [],
+    comments: [],
+    like: "",
+    detail: [],
+    userDetail: [],
+   
+   
   },
   reducers: {
     fetchStart: (state) => {
       state.loading = true;
       state.error = false;
     },
-    //  her bir api yapisi icin tek tek reducer yazmak yerine tek bir reducer ile isi halledeblrz.veri getirmek icin getSuccess reduceri yaziyoruz.initialState ler bir obje o.i. objelerde key ler 2 yolla cagrilir.1- . notation 2- [] notation. FAKAT burda string olarak gelecek veriler ve . notation olmaz(state."likes" diye bir yazim yok cunku) .o nedenle [ ]icinde yazacagiz.su url den gelen veriyi data ya esitle diyoruz.ve bunu store a bildirelim
-    getSuccess: (state, { payload }) => {
+
+    getSucces: (state, { payload }) => {
       state.loading = false;
       state[payload.url] = payload.data;
     },
 
-    fetchFail: (state) => {
+   
+
+    postLikeSuccess: (state, { payload }) => {
       state.loading = false;
-      state.error = true;
+      state.like = payload;
+    },
+
+    getDetSuccess: (state, { payload }) => {
+      state.loading = false;
+      state.detail = payload;
+    },
+
+    getCommentSuccess: (state, { payload }) => {
+      state.loading = false;
+      state.comments = payload;
+    },
+
+    getCategorySuccess: (state, { payload }) => {
+      state.loading = false;
+      state.categories = payload;
     },
 
     getNewBlogSuccess: (state, { payload }) => {
       state.loading = false;
       state.blogs = [...state.blogs, { ...payload }];
     },
+
+    // getBlogDetailData:(state,{payload})=>{
+    //   state.loading=false;
+    //   state.values=payload;
+    // },
+    getUserSuccess: (state, { payload }) => {
+      state.loading = false;
+      state.userDetail=payload;
+    },
+     fetchFail: (state) => {
+      state.loading = false;
+      state.error = true;
+    },
   },
 });
 
 export const {
   fetchStart,
-  getSuccess,
+  getSucces,
   fetchFail,
+  postLikeSuccess,
+  getDetSuccess,
+  getCommentSuccess,
   getNewBlogSuccess,
+  getCategorySuccess,
+  getBlogDetailData,
+  getUserSuccess,
 } = blogSlice.actions;
-export default blogSlice.reducer; // burasi karsilarken blogReducer oluyor
+export default blogSlice.reducer;

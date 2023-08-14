@@ -3,20 +3,28 @@ import React from 'react'
 import { useSelector } from 'react-redux';
 
 const useAxios = () => {
-  const {token}=useSelector(state=>state.auth)
+  
+      const { token } = useSelector((state) => state.auth);
+    //   bizim url adresimiz: process.env.REACT_APP_BASE_URL;
 
-  //Token gerektiren islemler icin;
- const axiosWithToken = axios.create({
-   baseURL: process.env.REACT_APP_BASE_URL,
-   //  timeout: 1000,
-   headers: { Authorization: `Token ${token}` },
- });
+    const axiosWithToken = axios.create({
+      baseURL: process.env.REACT_APP_BASE_URL,
+      //   timeout: 1000,
+      headers: {
+        Authorization: `Token ${token}`,
+      },
+    });
 
- //token olmadan yapilacak islemler icin
- const axiosWithPublic = axios.create({
-   baseURL: process.env.REACT_APP_BASE_URL,
- });
- return(axiosWithToken,axiosWithPublic)
+//tokensiz islemler icin de yapablrz
+      const axiosWithPublic = axios.create({
+        baseURL: process.env.REACT_APP_BASE_URL,
+        //   timeout: 1000,
+        // headers: {
+        //   Authorization: `Token ${token}`,
+        // },
+      });
+
+      return{axiosWithToken,axiosWithPublic}
 }
 
 export default useAxios

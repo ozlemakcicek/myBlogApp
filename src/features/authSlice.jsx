@@ -1,4 +1,5 @@
-//!dispatch leri yayinladigimiz sayfa.yine redux-toolkit sayfasindan yapiyi aliyoruz.name istedihin seyi ver.initialState olarak ise authentication da ne lazimsa bize ve ne olmasi lazimsa ilk etapta onlari yaziyoruz.reducer kismina ise kendi reducerlarimizi yazip sonra dispatch ile bunlari yayinlayacagiz ilgili yerlerde.reducerlarin icerisini ise initialState leri state den cagirarak dolduruyoruz
+//!dispatch leri yayinladigimiz sayfa
+
 
 import { createSlice } from "@reduxjs/toolkit";
 
@@ -8,51 +9,49 @@ const authSlice = createSlice({
 
   initialState: {
     currentUser: null,
-    currentUserId: null,
+     currentUserId: null,
     loading: false,
     error: false,
     isAdmin: false,
     token: null,
-    image: null,
-
-    id: 0,
-    email: null,
-    bio: null,
+    image:null,
+   
+    id:0,
+    email:null,
+    bio:null,
+    
   },
   reducers: {
     fetchStart: (state) => {
       state.loading = true;
       state.error = false;
     },
-    registerSuccess:(state, {payload})=>{
+     registerSuccess: (state, { payload }) => {
       state.loading = false;
-      state.currentUser=payload?.username
+      state.currentUser = payload?.username;
+      state.token = payload?.token;
       state.error = false;
-      state.token=payload?.token;
-      state.currentUserId=payload?.id
-
+      state.currentUserId=payload.id;
     },
-
-    loginSuccess:(state, {payload})=>{
-       state.loading = false;
-       state.error = false;
-       state.currentUser = payload?.user?.username;
-       state.isAdmin=payload?.user?.is_superuser;   
-       state.token = payload?.key;
-       state.currentUserId = payload?.user?.id;
+    loginSuccess: (state, { payload }) => {
+      state.loading = false;
+      state.currentUser = payload?.user?.username;
+      state.isAdmin = payload?.user?.is_superuser;
+      state.token = payload?.key;
+      state.currentUserId = payload.user.id;
     },
-    logoutSuccess:(state )=>{
-      state.loading=false;
-      state.error=false;
-      state.currentUser=null;
-      state.token=null
-      
+    logoutSuccess: (state) => {
+      state.loading = false;
+      state.currentUser = null;
+      state.token = null;
     },
-
+   
     fetchFail: (state) => {
       state.loading = false;
       state.error = true;
     },
+
+
   },
 });
 
@@ -64,3 +63,4 @@ export const {
   fetchFail,
 } = authSlice.actions;
 export default authSlice.reducer;
+

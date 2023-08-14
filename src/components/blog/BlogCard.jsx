@@ -18,6 +18,9 @@ import { useState } from 'react';
 import { Button, Grid } from '@mui/material';
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { toastWarnNotify } from '../../helper/ToastNotify';
+import useBlogContext from '../../hooks/useBlogContext';
 
 
 
@@ -25,13 +28,38 @@ import { useSelector } from 'react-redux';
 
 const BlogCard=({blog})=> {
   const {currentUser}=useSelector(state=>state.auth)
-  const [currentDate, setCurrentDate] = useState(""); // Boş bir tarih durumu oluşturun
 
+  const{postLike}=useBlogContext()
+
+
+
+  const [currentDate, setCurrentDate] = useState(""); // Boş bir tarih durumu oluşturun
   useEffect(() => {
     // Bileşen yüklendiğinde güncel tarihi al
     const today = new Date().toLocaleDateString();
     setCurrentDate(today);
   }, []); // Boş dizi, sadece bileşen yüklendiğinde çalışır
+
+
+const navigate=useNavigate()
+
+const handleClickRM=(id)=>{
+  if(!currentUser){
+    navigate('/login')
+    toastWarnNotify('Sie müssen anmelden!')
+  }else{
+    navigate(`blog/detail/${id}`)
+  }
+}
+
+
+const [isClicked,setClicked]=useState(false)
+
+const handleClickLike=()=>{
+  postLike(blog?.id);
+ (!currentUser? navigate('/login'): setClicked(!isClicked))
+}
+
 
   return (
     <Card sx={{ maxWidth: 345 }}>
@@ -64,20 +92,31 @@ const BlogCard=({blog})=> {
           {currentUser ? <span>{currentUser}</span> : <span>admin</span>}
         </Grid>
       </CardContent>
+
       <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
+        <IconButton
+          aria-label="add to favorites"
+          color={isClicked ? "error" : "default"}
+          onClick={handleClickLike}
+        >
           <FavoriteIcon />
+          <Typography variant="h4">{blog?.likes}</Typography>
         </IconButton>
+
         <IconButton aria-label="share">
           <ChatBubbleIcon />
+          <Typography variant="h4">{blog?.comment_count}</Typography>
         </IconButton>
+
         <IconButton aria-label="share">
           <VisibilityIcon />
+          <Typography variant="h4">{blog?.post_views}</Typography>
         </IconButton>
         <Button
           sx={{
-            width: "7rem",
+            width: "18rem",
             height: "4vh",
+            // marginLeft: "3rem",
             color: "white",
             bgcolor: "grey",
             "&:hover": {
@@ -86,6 +125,7 @@ const BlogCard=({blog})=> {
             },
             marginLeft: "5rem",
           }}
+          onClick={() => handleClickRM(blog.id)}
         >
           READ MORE
         </Button>

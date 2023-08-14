@@ -1,9 +1,10 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchFail, fetchStart, getNewBlogSuccess, getSuccess} from '../features/blogSlice'
+import { fetchFail, fetchStart, getCategorySuccess, getCommentSuccess, getDetSuccess, getNewBlogSuccess, getSuccess, getUserSuccess, postLikeSuccess} from '../features/blogSlice'
 import axios from "axios"
 import { toastErrorNotify, toastSuccessNotify } from '../helper/ToastNotify';
 import useAxios from './useAxios';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -14,6 +15,7 @@ const useBlogContext = () => {
     const {axiosWithToken}=useAxios()
     const { axiosWithPublic } = useAxios();
     const dispatch =useDispatch() 
+    const navigate=useNavigate()
 
 
 // const  getBlogData=async()=>{
@@ -41,6 +43,7 @@ const  getBlogData=async(url)=>{
 
     try {
        const {data}= await axios.get(`${BASE_URL}api/${url}/`)
+       dispatch(getSuccess({ data, url }));
      
        
         console.log(data);
@@ -50,6 +53,7 @@ const  getBlogData=async(url)=>{
     } catch (error) {
         console.log(error);
         dispatch(fetchFail())
+        navigate("/notfound");
         
     }
    
@@ -77,13 +81,26 @@ const deleteBlogData = async (url,id) => {
   }
 };
 
+ const putBlogData = async (formValues, idNo) => {
+   dispatch(fetchStart);
+
+   try {
+     await axiosWithToken.put(`api/blogs/${idNo}/`, formValues);
+     getBlogData(idNo);
+     toastSuccessNotify(`successfuly updated!`);
+   } catch (error) {
+     toastErrorNotify(`not successfuly updated!`);
+     dispatch(fetchFail());
+   }
+ };
+
 
 
 const postNewBlog=async(values)=>{
   dispatch(fetchStart())
   console.log(values);
   try {
-   const {data}= await axiosWithToken.post(`api/blogs`, values )
+   const {data}= await axiosWithToken.post(`api/blogs/`, values )
    dispatch(getNewBlogSuccess(data))
   
 
@@ -93,15 +110,110 @@ const postNewBlog=async(values)=>{
   }
 }
 
+const postLike=async(idl)=>{
+  console.log(token);
+  dispatch(fetchStart())
+  try {
+     
+  await axiosWithToken.post(`api/likes/${idl}/`, null,)
 
+  dispatch(postLikeSuccess())
 
-
-
-
-
-
-
-return{getBlogData,deleteBlogData,postNewBlog}
+  } catch (error) {
+    console.log(error);
+    dispatch(fetchFail())
+    
+  }
 }
+
+
+
+const postComment=async(comm, idd)=>{
+    dispatch(fetchStart())
+    try {
+         await axiosWithToken.post(`api/comments/${idd}/`, comm)
+         getComment(idd)
+         toastSuccessNotify(`successfuly performed!`);
+        
+    } catch (error) {
+      
+      console.log(error);
+      dispatch(fetchFail())
+      toastErrorNotify(`not successfuly performed!`);
+      
+    }
+ 
+  }
+
+  const getComment=async(idd)=>{
+    dispatch(fetchStart())
+    try {
+      const {data}=  await axios.get(`${BASE_URL}api/comments/${idd}/`) 
+    dispatch(getCommentSuccess(data))
+    } catch (error) {
+      console.log(error);
+      dispatch(fetchFail())
+      
+    }
+  }
+
+  const getCategoryData = async () => {
+    dispatch(fetchStart());
+    try {
+      const { data } = await axios.get(`${BASE_URL}api/categories/`);  // API da yaninda - varsa data donuyor demek.ve bu donen datayi yayinlamak icin bir reducera ihtiyac var
+      dispatch(getCategorySuccess(data));
+    } catch (error) {
+      dispatch(fetchFail());
+    }
+  };
+
+
+  const getDetailData=async(id)=>{
+    dispatch(fetchStart())
+    try {
+      
+     const {data}= await axiosWithToken.get(`api/blogs/${id}/`)
+     dispatch(getDetSuccess(data))
+    } catch (error) {
+      dispatch(fetchFail())
+    }
+  }
+
+   const getUserData = async (authorId) => {
+     dispatch(fetchStart());
+     try {
+       const { data } = await axiosWithToken.get(
+         `api/blogs/?author=${authorId}`
+       );
+       console.log(data);
+       dispatch(getUserSuccess(data));
+     } catch (error) {
+       console.log(error);
+       dispatch(fetchFail);
+     }
+   };
+
+
+
+
+
+ 
+ return {
+   getBlogData,
+   deleteBlogData,
+   postNewBlog,
+   postLike,
+   postComment,
+   getComment,
+   getDetailData,
+   getCategoryData,
+   putBlogData,
+   getUserData
+ }; 
+}
+
+
+
+
 
 export default useBlogContext

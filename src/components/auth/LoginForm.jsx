@@ -1,31 +1,31 @@
-import React from 'react'
-import * as Yup from "yup";
+import { Button } from "@mui/material";
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+
 import { Form } from "formik";
-import {
-  Box,
-  Button,
-  TextField,
+import { useNavigate } from "react-router-dom";
+import { object, string } from "yup";
 
-} from "@mui/material";
-
-export const LoginSchema = Yup.object().shape({
-  email: Yup.string().email("Invalid email").required("erforderlich"),
-  password: Yup.string()
-    
-    .required("erforderlich"),
+export const loginScheme = object({
+  email: string()
+    .email("Lutfen valid bir email giriniz")
+    .required("Email zorunludur"),
+  password: string().required("password zorunludur"),
 });
-//callback deki degerleri ...props ile buraya gondermistik burda da karsiladik
-const LoginForm = ({values,handleBlur,handleChange,touched,errors}) => {
+
+const LoginForm = ({ values, handleChange, errors, touched, handleBlur }) => {
+  
+  const navigate=useNavigate()
+  
   return (
-    <Form>
+    <Form >
       <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
         <TextField
-          id="email"
-          name="email"
-          type="email"
           label="Email"
+          name="email"
+          id="email"
+          type="email"
           variant="outlined"
-          // defaultValue="Email"
           value={values.email}
           onChange={handleChange}
           onBlur={handleBlur}
@@ -33,14 +33,12 @@ const LoginForm = ({values,handleBlur,handleChange,touched,errors}) => {
           error={touched.email && Boolean(errors.email)}
           required
         />
-
         <TextField
-          id="password"
-          name="password"
-          type="password"
           label="Password"
+          name="password"
+          id="password"
+          type="password"
           variant="outlined"
-          // defaultValue="Password"
           value={values.password}
           onChange={handleChange}
           onBlur={handleBlur}
@@ -48,14 +46,22 @@ const LoginForm = ({values,handleBlur,handleChange,touched,errors}) => {
           error={touched.password && Boolean(errors.password)}
           required
         />
-
-        <Button type="submit" variant="contained" size="large"
+        <Button
+          variant="contained"
+          type="submit"
+          sx={{
+            bgcolor: "lightGrey",
+            color: "black",
+            fontWeight: "600",
+            ":hover": { bgcolor: "grey" }
+          }}
+         
         >
-         Anmeldung
+          SIGN IN
         </Button>
       </Box>
     </Form>
   );
-}
+};
 
-export default LoginForm
+export default LoginForm;
