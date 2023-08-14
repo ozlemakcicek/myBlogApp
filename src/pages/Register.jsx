@@ -22,7 +22,7 @@ const Register = () => {
   const { register } = useAuthCalls();
 
   return (
-    <Container maxWidth="lg">
+    <Container maxWidth="lg" >
       <Grid
         container
         justifyContent="center"
@@ -30,6 +30,8 @@ const Register = () => {
         direction="row-reverse"
         // rowSpacing={{ sm: 3 }}
         spacing={3}
+        sx={{   mb:"5rem"}}
+     
       
       >
         <Grid item xs={12}  md={6} lg={6}>
@@ -75,8 +77,7 @@ const Register = () => {
             component={(props) => <RegisterForm {...props} />}
           >
 </Formik>
-          <Box sx={{ mt: 3, textAlign: "center", width: "100%",position: "absolute", // Yeni stil eklendi
-              bottom: 0 }}>
+          <Box sx={{textAlign:"center", mt:3}}>
             <Link to="/login">Haben Sie ein Konto?</Link>
           </Box>
         </Grid>
@@ -98,6 +99,7 @@ const Register = () => {
           </Container>
         </Grid>
       </Grid>
+     
     </Container>
   );
 };

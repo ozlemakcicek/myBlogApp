@@ -32,6 +32,7 @@ import UpdateModal from "../components/blog/UpdateModal";
 
 
 const Detail = () => {
+  //const navigate =useNavigate()
 
   const { currentUser } = useSelector((state) => state.auth);
   const { detail } = useSelector((state) => state.blog);
@@ -209,6 +210,9 @@ const Detail = () => {
                   setFormValues(detail);
                   handleOpen();
                 }}
+                // onSubmit={()=>{
+                //   navigate("/")
+                // }}
               >
                 Update Blog
               </Button>

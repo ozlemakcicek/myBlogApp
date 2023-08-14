@@ -165,7 +165,17 @@ const RegisterForm = ({
                     error={touched.image && errors.image}
                     required
                   /> */}
-          <Button type="submit" variant="contained" size="large">
+          <Button
+            type="submit"
+            variant="contained"
+            size="large"
+            sx={{
+              bgcolor: "lightGrey",
+              color: "black",
+              fontWeight: "600",
+              ":hover": { bgcolor: "grey" },
+            }}
+          >
             Register
           </Button>
         </Box>

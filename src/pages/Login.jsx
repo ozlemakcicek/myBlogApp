@@ -17,7 +17,7 @@ const Login = () => {
   const { login } = useAuthCalls();
 
   return (
-    <Container maxWidth="lg">
+    <Container maxWidth="lg" >
       <Grid
       container
 
@@ -26,7 +26,7 @@ const Login = () => {
         direction="row-reverse"
         //rowSpacing={{ sm: 3 }}
         spacing={3}
-        sx={{ height: "85vh", paddingTop: "1rem" }}
+        sx={{ height: "85vh", paddingTop: "1rem", mb:"5rem" }}
       >
         <Grid item xs={12} sm={10} md={6} lg={6}>
           <Avatar
@@ -73,7 +73,7 @@ const Login = () => {
               style={{
                
                 width: "100%", // Image takes the full width of the container
-                height: "38vh", // Maintain aspect ratio
+               
                display: "block", // Remove inline alignment
                 margin: "auto",
               }}

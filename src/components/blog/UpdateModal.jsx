@@ -19,7 +19,7 @@ import useBlogCalls from "../../hooks/useBlogCalls";
 
 const UpdateModal = ({ open,handleOpen, handleClose,blogId,formValues,setFormValues }) => {
 
-
+const navigate=useNavigate()
 
   
 const{getBlogData,putBlogData}=useBlogCalls()
@@ -46,6 +46,7 @@ const{getBlogData,putBlogData}=useBlogCalls()
     putBlogData(formValues,blogId)
  
     handleClose();
+   
   };
 
   console.log(formValues);
@@ -57,11 +58,9 @@ const{getBlogData,putBlogData}=useBlogCalls()
       open={open}
       onClose={() => {
         handleClose();
-      
       }}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
-      
     >
       <Container maxWidth="lg">
         <Grid
@@ -95,7 +94,6 @@ const{getBlogData,putBlogData}=useBlogCalls()
                 }}
                 component={"form"}
                 onSubmit={handleSubmit}
-                
               >
                 <Typography
                   sx={{ fontFamily: "fantasy", paddingLeft: "1rem" }}
@@ -163,7 +161,10 @@ const{getBlogData,putBlogData}=useBlogCalls()
                   </FormControl>
                 </Box>
 
-                <Box sx={{ minWidth: 120 }}>
+                <Box
+                  sx={{ minWidth: 120 }}
+                  
+                >
                   <FormControl fullWidth>
                     <InputLabel
                       id="demo-simple-select-label"
@@ -221,11 +222,9 @@ const{getBlogData,putBlogData}=useBlogCalls()
                     color: "black",
                     fontWeight: "600",
                     ":hover": { bgcolor: "orange" },
-                  }} 
-                  
+                  }}
                 >
-                UPDATE BLOG
-                 
+                  UPDATE BLOG
                 </Button>
               </Box>
             </Card>

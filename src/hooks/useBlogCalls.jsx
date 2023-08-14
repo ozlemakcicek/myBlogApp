@@ -42,10 +42,12 @@ const useBlogCalls = () => {
       dispatch(getSucces({ data, url }));
 
       console.log(data);
+    
     } catch (error) {
       dispatch(fetchFail());
       console.log(error);
       navigate("/notfound");
+      
     }
   };
 
@@ -112,8 +114,9 @@ const useBlogCalls = () => {
         `api/blogs/${idNo}/`,
         formValues,
       );
-      getBlogData(idNo)
+      // getBlogData(idNo)
      toastSuccessNotify(`successfuly updated!`)
+    navigate('/');
     } catch (error) {
      
       toastErrorNotify(`not successfuly updated!`)
