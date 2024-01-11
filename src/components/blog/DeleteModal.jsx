@@ -1,7 +1,7 @@
 import React from 'react'
 import useBlogCalls from '../../hooks/useBlogCalls'
 import { useNavigate } from 'react-router-dom';
-import { toastSuccessNotify } from '../../helper/ToastNotify';
+// import { toastSuccessNotify } from '../../helper/ToastNotify';
 import { Box, Button, Modal, Typography } from '@mui/material';
 
 const DeleteModal = ({handleClose,open,blogId,}) => {

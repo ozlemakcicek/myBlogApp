@@ -16,7 +16,7 @@ import MenuItem from "@mui/material/MenuItem";
 import MyLogo from "../assets/ÖZLEM (3).gif";
 import logo2 from "../assets/1.png";
 
-import MyImage from "../assets/ÖZLEM AKCICEK (3).png";
+// import MyImage from "../assets/ÖZLEM AKCICEK (3).png";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 

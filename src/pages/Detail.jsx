@@ -4,10 +4,10 @@ import {
   Avatar,
   Box,
   Button,
-  Card,
+  
   CardActions,
   CardContent,
-  CardHeader,
+
   CardMedia,
   IconButton,
   Typography,
@@ -16,11 +16,11 @@ import {
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
-import { useNavigate, useParams } from "react-router-dom";
-import authSlice from "../features/authSlice";
+import {  useParams } from "react-router-dom";
+
 import { useSelector } from "react-redux";
-import { toastWarnNotify } from "../helper/ToastNotify";
-import axios from "axios";
+
+
 
 import { Grid } from "@mui/material";
 import useBlogCalls from "../hooks/useBlogCalls";

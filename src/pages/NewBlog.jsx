@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Form, Formik } from "formik";
 
-import { object, string, ref } from "yup";
+import { object, string } from "yup";
 
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
@@ -21,8 +21,8 @@ import { useSelector } from "react-redux";
 
 import useBlogCalls from "../hooks/useBlogCalls";
 import { toastSuccessNotify } from "../helper/ToastNotify";
-import { useLocation, useNavigate } from "react-router-dom";
-import MyBlogs from "./MyBlogs";
+import { useNavigate } from "react-router-dom";
+// import MyBlogs from "./MyBlogs";
 // import MyBlogCard from "../components/blog/MyBlogCard";
 
 export const newBlogSchema = object().shape({

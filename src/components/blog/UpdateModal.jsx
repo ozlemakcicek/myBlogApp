@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import { Form, useNavigate } from "react-router-dom";
+// import { Form, useNavigate } from "react-router-dom";
 import {
   Card,
   Container,
@@ -17,9 +17,9 @@ import {
 import { useSelector } from "react-redux";
 import useBlogCalls from "../../hooks/useBlogCalls";
 
-const UpdateModal = ({ open,handleOpen, handleClose,blogId,formValues,setFormValues }) => {
+const UpdateModal = ({ open, handleClose,blogId,formValues,setFormValues }) => {
 
-const navigate=useNavigate()
+
 
   
 const{getBlogData,putBlogData}=useBlogCalls()

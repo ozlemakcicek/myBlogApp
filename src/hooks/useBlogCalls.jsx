@@ -1,10 +1,9 @@
 //!rafce ile customhooku kurup,Card daki axsios islemini ortak alana tasiyorz ve return unu yapiyorz
 
-import React from "react";
+
 import {
   fetchFail,
   fetchStart,
-  getBlogDetailData,
   getCommentSuccess,
   getDetSuccess,
   getNewBlogSuccess,

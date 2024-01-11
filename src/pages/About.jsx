@@ -3,7 +3,7 @@ import MyFoto from "../assets/ÖZLEM AKCICEK (3).png";
 import { Box, Grid, IconButton } from '@mui/material';
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import GitHubIcon from "@mui/icons-material/GitHub";
-import { WidthFull } from '@mui/icons-material';
+
 
 
 

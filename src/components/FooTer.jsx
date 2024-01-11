@@ -1,8 +1,8 @@
 import React from "react";
 import Box from "@mui/material/Box";
-import BottomNavigation from "@mui/material/BottomNavigation";
+
 import { Typography, Container } from "@mui/material";
-import { styled } from "@mui/system";
+
 
 const FooTer = () => {
   return (

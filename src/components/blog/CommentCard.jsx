@@ -1,5 +1,5 @@
 import { Box, Typography } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import useBlogCalls from "../../hooks/useBlogCalls";
 import {  useSelector } from "react-redux";
 
